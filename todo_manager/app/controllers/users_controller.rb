@@ -1,3 +1,2 @@
-class UsersController < ApplicationController
-	has_many :tasks
+class UsersController < Clearance::UsersController
 end

@@ -1,1 +1,56 @@
-<h1> This page is gonna show all the tasks that a user has </h1>
+<h1> This page shows all the tasks that a user has (task controller) </h1>
+
+<hr>
+
+<h2>My Tasks</h2>
+<% @user.tasks.each do |task| %>
+  <p>
+    <strong>Content:</strong>
+    <%= task.content %>
+  </p>
+ 
+  <p>
+    <strong>Due Date:</strong>
+    <%= task.due_date %>
+  </p>
+
+  <p>
+    <strong>ID:</strong>
+    <%= task.id %>
+  </p>
+  
+  <p>
+    <strong>User email:</strong>
+    <%= task.user.email %>
+  </p>
+  
+  <%= link_to 'Delete Task', [task.user, task],
+               method: :delete,
+               data: { confirm: 'Are you sure you want to delete this task?' } %>
+  <hr>
+
+<% end %>
+
+<hr>
+
+<h1> Add a New Task! </h1>
+
+<%= form_with(model: [ @user, @user.tasks.build ], local: true) do |form| %>
+
+  
+  
+  <p>
+    <%= form.label :content %><br>
+    <%= form.text_field :content %>
+  </p>
+ 
+  <p>
+    <%= form.label :due_date %><br>
+    <%= form.date_field :due_date %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
