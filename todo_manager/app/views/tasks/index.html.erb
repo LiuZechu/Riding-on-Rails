@@ -1,8 +1,36 @@
-<h1> This page shows all the tasks that a user has (task controller) </h1>
+<h1> My Tasks </h1>
 
 <hr>
 
-<h2>My Tasks</h2>
+<!-- OPTION ONE -->
+
+<table>
+	<tr>
+		<th>Task</th>
+		<th>Due Date</th>
+		<th>Tag</th>
+		<th>Priority Level</th>
+		<th colspan="2"></th>
+	</tr>
+
+	<% @user.tasks.each do |task| %>
+		<tr>
+			<td><%= task.content %></td>
+			<td><%= task.due_date %></td>
+			<td><%= task.tag %></td>
+			<td><%= task.priority_level %></td>
+			<td><%= link_to 'Edit', edit_user_task_path(task.user, task)%></td>
+			<td><%= link_to 'Delete', [task.user, task],
+               method: :delete,
+               data: { confirm: 'Are you sure you want to delete this task?' } %></td>
+		</tr>
+	<% end %>
+</table>
+
+
+<!-- OPTION TWO -->
+
+<hr>
 <% @user.tasks.each do |task| %>
   <p>
     <strong>Content:</strong>
@@ -15,16 +43,18 @@
   </p>
 
   <p>
-    <strong>ID:</strong>
-    <%= task.id %>
+    <strong>Tag:</strong>
+    <%= task.tag %>
   </p>
-  
+
   <p>
-    <strong>User email:</strong>
-    <%= task.user.email %>
+    <strong>Priority Level:</strong>
+    <%= task.priority_level %>
   </p>
-  
-  <%= link_to 'Delete Task', [task.user, task],
+
+  <%= link_to 'Edit', edit_user_task_path(task.user, task)%>
+
+  <%= link_to 'Delete', [task.user, task],
                method: :delete,
                data: { confirm: 'Are you sure you want to delete this task?' } %>
   <hr>
@@ -37,8 +67,6 @@
 
 <%= form_with(model: [ @user, @user.tasks.build ], local: true) do |form| %>
 
-  
-  
   <p>
     <%= form.label :content %><br>
     <%= form.text_field :content %>
@@ -48,7 +76,17 @@
     <%= form.label :due_date %><br>
     <%= form.date_field :due_date %>
   </p>
- 
+
+  <p>
+    <%= form.label :tag %><br>
+    <%= form.select(:tag, ['Work', 'Study', 'Family', 'Shopping', 'Entertainment', 'Miscellaneous']) %>
+  </p>
+
+  <p>
+    <%= form.label :priority_level %><br>
+    <%= form.select(:priority_level, ['Urgent', 'Normal', 'Trivial']) %>
+  </p>
+
   <p>
     <%= form.submit %>
   </p>

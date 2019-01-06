@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_042603) do
+ActiveRecord::Schema.define(version: 2019_01_06_140023) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "content"
-    t.datetime "due_date"
+    t.date "due_date"
     t.integer "user_id"
     t.string "tag"
     t.string "priority_level"

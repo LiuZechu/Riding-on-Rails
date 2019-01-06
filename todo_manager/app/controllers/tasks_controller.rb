@@ -6,12 +6,28 @@ class TasksController < ApplicationController
 	    #@task = @user.tasks.create(task_params)
 	    #(params[:task])
 	end
-
+  	
+  	def edit
+  		@user = current_user
+  		@task = @user.tasks.find(params[:id])
+  	end
+	
 	def create
 		@user = current_user
 	    @task = @user.tasks.create(task_params)
 	    redirect_to user_tasks_path
   	end
+
+	def update
+		@user = current_user
+	    @task = @user.tasks.find(params[:id])
+
+	  if @task.update(task_params)
+	    redirect_to user_tasks_path
+	  else
+	    render 'edit'
+	  end
+	end
 
   	def destroy
  		@user = current_user
@@ -30,7 +46,7 @@ class TasksController < ApplicationController
 	end
 
 	def task_params
-      params.require(:task).permit(:content, :due_date)
+      params.require(:task).permit(:content, :due_date, :tag, :priority_level)
       #params.permit(:content, :due_date)
     end
 end
