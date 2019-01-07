@@ -29,14 +29,33 @@ class TasksController < ApplicationController
 	  end
 	end
 
+	def complete
+		@user = current_user
+	    @task = @user.tasks.find(params[:id])
+	    @task.is_completed = true
+	    @task.save
+	    redirect_to user_tasks_path
+	end
+
+	def view #view completed tasks
+		@user = current_user
+	end
+
+	def undo
+		@task = current_user.tasks.find(params[:id])
+		@task.is_completed = false
+		@task.save
+		redirect_to view_completed_path
+	end
+
   	def destroy
  		@user = current_user
 	    @task = @user.tasks.find(params[:id])
 	    @task.destroy
-	    redirect_to user_tasks_path
+	    #redirect_to user_tasks_path
+	    redirect_back(fallback_location: user_tasks_path)
   	end
  
-  
 	private
 	  def require_login
 		unless signed_in?
@@ -46,7 +65,8 @@ class TasksController < ApplicationController
 	end
 
 	def task_params
-      params.require(:task).permit(:content, :due_date, :tag, :priority_level)
+	  #params.permit(:content, :due_date, :tag, :priority_level, :is_completed)
+      params.require(:task).permit(:content, :due_date, :tag, :priority_level, :is_completed)
       #params.permit(:content, :due_date)
     end
 end

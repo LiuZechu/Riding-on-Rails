@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
       #added tasks under users
-    resources :tasks
+    resources :tasks 
+
   end
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
@@ -16,4 +17,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#index'
+  match 'users/:user_id/tasks.:id' => 'tasks#complete', as: 'complete_task', via: :put
+  get 'users/:user_id/completed' => 'tasks#view', as: 'view_completed'
+  put 'users/:user_id/completed/:id' => 'tasks#undo', as: 'undo_task'
 end
