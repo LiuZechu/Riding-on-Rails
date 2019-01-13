@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   match 'users/:user_id/tasks.:id' => 'tasks#complete', as: 'complete_task', via: :put
   get 'users/:user_id/completed' => 'tasks#view', as: 'view_completed'
   put 'users/:user_id/completed/:id' => 'tasks#undo', as: 'undo_task'
+  get 'users/:user_id/search' => 'tasks#search', as: 'search_task'
+  get '/admin' => 'welcome#admin', as: 'admin'
 end

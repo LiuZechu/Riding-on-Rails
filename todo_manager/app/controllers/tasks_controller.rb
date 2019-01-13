@@ -1,10 +1,25 @@
 class TasksController < ApplicationController
 	before_action :require_login
+	# before_action :set_user 
+	# private def set_user @user = current_user end
+	# then @user refers to current_user in all subsequent code
 
 	def index
 		@user = current_user
 	    #@task = @user.tasks.create(task_params)
 	    #(params[:task])
+	end
+
+	def search
+		@user = current_user
+		@tasks = @user.tasks.where(is_completed: false)
+		.where('content LIKE ?', "%#{params[:content]}%")
+		.where(tag: params[:tag])
+		.where(priority_level: params[:priority_level])
+	end
+
+	def new
+		@task = Task.new
 	end
   	
   	def edit
@@ -14,7 +29,16 @@ class TasksController < ApplicationController
 	
 	def create
 		@user = current_user
-	    @task = @user.tasks.create(task_params)
+	    #original
+	    #@task = @user.tasks.create(task_params)
+	    
+	    #try out
+	    #NOTE: flash messages are displayed twice remember to rectify this.
+	    @task = @user.tasks.new(task_params)
+	    unless @task.save
+	    	flash[:error] = "Task not saved! Task content can't be blank!"
+	    end
+
 	    redirect_to user_tasks_path
   	end
 
@@ -52,6 +76,7 @@ class TasksController < ApplicationController
  		@user = current_user
 	    @task = @user.tasks.find(params[:id])
 	    @task.destroy
+	    #flash[:success] = "Task deleted!"
 	    #redirect_to user_tasks_path
 	    redirect_back(fallback_location: user_tasks_path)
   	end

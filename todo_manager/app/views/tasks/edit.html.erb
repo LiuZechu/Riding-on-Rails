@@ -14,12 +14,12 @@
 
   <p>
     <%= form.label :tag %><br>
-    <%= form.select(:tag, ['Work', 'Study', 'Home', 'Entertainment', 'Miscellaneous']) %>
+    <%= form.select(:tag, [nil, 'Work', 'Study', 'Family', 'Shopping', 'Entertainment', 'Miscellaneous']) %>
   </p>
 
   <p>
     <%= form.label :priority_level %><br>
-    <%= form.select(:priority_level, ['Urgent', 'Normal', 'Trivial']) %>
+    <%= form.select(:priority_level, ['★', '★★', '★★★']) %>
   </p>
 
   <p>

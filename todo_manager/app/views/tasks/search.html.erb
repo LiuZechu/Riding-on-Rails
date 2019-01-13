@@ -1,0 +1,9 @@
+<h1> This page shows tasks that match search keywords </h1>
+
+<% @tasks.each do |task| %>
+	<p> Task: </p>
+	<%= task.content %>
+	<hr>
+<% end %>
+
+<%= link_to 'Back', user_tasks_path %> <br>
