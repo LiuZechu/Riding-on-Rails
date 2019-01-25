@@ -1,9 +1,65 @@
-<div class="jumbotron">
-<h1>Welcome to Planit</h1>
-<p> If you fail to plan, you plan to fail. </p>
-<p> Sign in now to plan your tasks and be productive! </p>
-<%= link_to 'Sign in', sign_in_path %>
-<%= link_to 'Admin', admin_path %>
-</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>TodoManager</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="container-fluid" style="background-color:#73EAF8; padding:20px; position: fixed;">
+      <header>
+        <div class="row">
+        <div class="col-md-9">
+        <h1 style="display: inline; padding-left: 50px;">Planit&trade;   </h1> <small style="font-size:20px">If you fail to plan, you plan to fail. Planit Now!</small>
+        </div>
+        <% if signed_in? %>
+        <div class="col-md-2">
+        <small style="display: inline;"> Signed in as: <%= current_user.email %> </small>
+        </div>
+        <div class="col-md-1">
+        <span><%= button_to 'Sign out', sign_out_path, method: :delete %></span></div>
+      <% else %>
+      <div class="col-md-3" style="text-align: right; right: 60px">
+        <button type="button" class="btn btn-secondary">
+          <%= link_to 'Home', root_path, style:"color:white" %>
+        </button>
+        <button type="button" class="btn btn-secondary">
+        <%= link_to 'Admin', admin_path, style:"color:white" %>
+        </button>
+      </div>
+      <% end %>
+      </div>
+      </header>
+    </div>
+  <!-- main body RMB TO CHANGE THE BACKGROUND URL LATER!-->
+    <div class="container-fluid" style="top:88px; bottom:0; left:0; right:0; position: absolute; overflow-y: scroll; text-align:center; background-image:url('https://www.hdwallpapers.in/download/planets_in_space_minimal-1920x1080.jpg');">
+      <h1 style="font-size:100px; margin-top: 200px; color:white; text-shadow: 5px 5px 8px #000000">Welcome to Planit&trade;.</h1>
+		<br>
+		<p style="color:white; font-size:30px; text-shadow: 2px 2px 4px #000000"> 
+      <button type="button" class="btn btn-primary"><%= link_to 'Sign in', sign_in_path, style: "color:white; font-size:22px"%></button> now to plan your tasks and be productive! </p>
+      <div id="flash">
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
+      <footer style="bottom: 0px; position: fixed;"><p>&copy; 2019 Liu Zechu | liuzechu2013@gmail.com | <a href="https://github.com/LiuZechu/Riding-on-Rails" target="_blank">GitHub</a></p></footer>
+   </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
 

@@ -12,10 +12,7 @@ class TasksController < ApplicationController
 
 	def search
 		@user = current_user
-		@tasks = @user.tasks.where(is_completed: false)
-		.where('content LIKE ?', "%#{params[:content]}%")
-		.where(tag: params[:tag])
-		.where(priority_level: params[:priority_level])
+		@tasks = @user.tasks.where("is_completed = false AND tag = ?", params[:tag])
 	end
 
 	def new

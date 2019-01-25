@@ -1,9 +1,106 @@
-<h1> This page shows tasks that match search keywords </h1>
+<% if not @tasks.any? %>
+	<div class="container-fluid" style="margin-top: 30px;">
+		<h1 align="center"> Oops, no matching task found.</h1>
+		<button type="button" class="btn btn-secondary">
+		<%= link_to 'Back', user_tasks_path, style:"color:white" %> </button>
+	</div>
+<% else %>
+<div class="container-fluid" style="margin-top: 30px;">
+	<% if @tasks.first.tag.blank? %>
+		<h1 align="center">The following tasks have no tag.</h1>
+	<% else %>
+		<h1 align="center">The following tasks are tagged "<%= @tasks.first.tag %>"</h1>
+	<% end %>
+</div>
 
-<% @tasks.each do |task| %>
-	<p> Task: </p>
-	<%= task.content %>
-	<hr>
+<!-- should try using partials cuz its the same thing-->
+<button type="button" class="btn btn-secondary">
+<%= link_to 'Back', user_tasks_path, style:"color:white" %> </button>
+ <br>
+<hr>
+
+
+<% if @tasks.where("due_date < ?", Date.today).any? %>
+	<h2>OVERDUE</h2>
+	<table class="table table-danger">
+		<tr>
+			<th>Task</th>
+			<th>Due</th>
+			<th>Tag</th>
+			<th>Priority</th>
+			<th>Overdue</th>
+			<th colspan="3"></th>
+		</tr>
+
+		<% @tasks.order("due_date ASC").where("due_date < ?", Date.today).each do |task| %>
+			<% if task.is_completed == false %>
+			<tr>
+				<td><%= task.content %></td>
+				<td><%= task.due_date %></td>
+				<td><%= task.tag %></td>
+				<td><%= task.priority_level %></td>
+				<td><%= pluralize(((task.due_date - Date.today) * -1).to_i, "day") %></td>
+				<td><%= link_to '', edit_user_task_path(task.user, task), :class => "far fa-edit"%></td>
+				<td><%= link_to '', [task.user, task],
+	               method: :delete,
+	               data: { confirm: 'Are you sure you want to delete this task?' }, :class => "far fa-trash-alt" %></td>
+	            <td><%= link_to '', complete_task_path(task.user, task), method: :put, :class => "far fa-check-circle"%></td>
+			</tr>
+			<% end %>
+		<% end %>
+	</table>
+<% end %>
+<% if @tasks.where(is_completed: false).where("due_date >= '#{Date.today}' OR due_date IS NULL").any? %>
+	<h2>NEED TO DO</h2>
+	<table class="table table-info">
+		<tr>
+			<th>Task</th>
+			<th>Due</th>
+			<th>Tag</th>
+			<th>Priority</th>
+			<th>Countdown</th>
+			<th colspan="3"></th>
+		</tr>
+
+		<% @tasks.order("due_date IS NULL, due_date ASC").where("due_date >= '#{Date.today}' OR due_date IS NULL").each do |task| %>
+			<% if task.is_completed == false %>
+			<tr>
+				<td><%= task.content %></td>
+				<% if task.due_date.nil? %>
+					<td>No Date</td>
+				<% else %>
+					<td><%= task.due_date %></td>
+				<% end %>
+				<td><%= task.tag %></td>
+				<td><%= task.priority_level %></td>
+				<% if not task.due_date.nil? %>
+				<% countdown = (task.due_date - Date.today).to_i %>
+				<td><% if countdown == 0%>
+					<%= "TODAY"%>
+					<% elsif countdown == 1
+						%>
+					<%= "TOMORROW" %>
+					<% else %>
+					<%= countdown.to_s + " days" %>
+					<% end %>
+				</td>
+				<% else %>
+				<td>-</td>
+				<% end %>
+				<!-- link to edit -->
+				<td><%= link_to '', edit_user_task_path(task.user, task), :class => "far fa-edit"%>
+				</td>
+				<!-- link to delete -->
+				<td><%= link_to '', [task.user, task],
+	               method: :delete,
+	               data: { confirm: 'Are you sure you want to delete this task?' }, :class => "far fa-trash-alt" %></td>
+	            <!-- link to mark as complete -->
+	            <td><%= link_to '', complete_task_path(task.user, task), method: :put, :class => "far fa-check-circle" %></td>
+			</tr>
+			<% end %>
+		<% end %>
+	</table>
 <% end %>
 
-<%= link_to 'Back', user_tasks_path %> <br>
+
+<% end %>

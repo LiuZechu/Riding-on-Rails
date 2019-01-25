@@ -1,0 +1,5 @@
+current directory: /Users/liuzechu/Desktop/cvwo_assignment/zechu_cvwo_assignment/todo_manager/vendor/bundle/ruby/2.3.0/gems/nokogiri-1.10.1/ext/nokogiri
+/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby -r ./siteconf20190120-18043-4p0777.rb extconf.rb --use-system-libraries
+mkmf.rb can't find header files for ruby at /System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
