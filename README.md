@@ -25,4 +25,5 @@ A0188295L
 * [Bootstrap](https://getbootstrap.com/) - for CSS styling
 
 ## Author
-Liu Zechu, CS undergraduate at National University of Singapore (NUS). GitHub - [LiuZechu] (https://github.com/LiuZechu). Email: `liuzechu2013@gmail.com`.
+**Liu Zechu** - *CS undergraduate at National University of Singapore (NUS)*. 
+GitHub - [LiuZechu] (https://github.com/LiuZechu). Email - `liuzechu2013@gmail.com`.
