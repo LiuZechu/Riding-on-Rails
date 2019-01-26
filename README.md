@@ -16,13 +16,13 @@ A0188295L
 ## Getting started locally
 1. Install Ruby on Rails.
 2. Clone this repository to a local folder.
-3. Navigate to the folder  `todo_manager` and run  `bin/rails server` in the terminal/command prompt.
+3. Navigate to the folder  `todo_manager` and run  `$ bin/rails server` in the terminal/command prompt.
 4. Access the application on a browser at `http://localhost:3000/`.
 
 ## Built With
-* [Ruby on Rails] (https://rubyonrails.org/) - main web application framework
-* [Clearance] (https://github.com/thoughtbot/clearance) - for user sign-in feature
-* [Bootstrap] (https://getbootstrap.com/) - for CSS styling
+* [Ruby on Rails](https://rubyonrails.org/) - main web application framework
+* [Clearance](https://github.com/thoughtbot/clearance) - for user sign-in feature
+* [Bootstrap](https://getbootstrap.com/) - for CSS styling
 
 ## Author
 Liu Zechu, CS undergraduate at National University of Singapore (NUS). GitHub - [LiuZechu] (https://github.com/LiuZechu). Email: `liuzechu2013@gmail.com`.
