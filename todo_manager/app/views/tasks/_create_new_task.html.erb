@@ -1,17 +1,15 @@
-<div class="container-fluid" style="margin-top: 30px;">
-<h1> Edit Task </h1>
-</div>
-<hr>
-
-<%= form_with(model: [@user, @task], local: true) do |form| %>
+<h1> Add a New Task! </h1>
+<% task = @user.tasks.build %>
+<%= flash.now[:error] %>
+<%= form_with(model: [ @user, task ], local: true) do |form| %>
   <p>
     <%= form.label :content %><br>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, placeholder: 'Create a new task here ...'%>
   </p>
  
   <p>
     <%= form.label :due_date %><br>
-    <%= form.date_field :due_date %>
+    <%= form.date_field :due_date, min: Date.today %>
   </p>
 
   <p>
@@ -26,9 +24,5 @@
 
   <p>
     <%= form.submit %>
-  </p> 
+  </p>
 <% end %>
-<hr>
-<button type="button" class="btn btn-secondary">
-    <%= link_to 'Back', user_tasks_path, style:"color:white" %>
-</button>

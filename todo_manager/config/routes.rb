@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
       #added tasks under users
     resources :tasks 
-
+  
   end
 
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   put 'users/:user_id/completed/:id' => 'tasks#undo', as: 'undo_task'
   get 'users/:user_id/search' => 'tasks#search', as: 'search_task'
   get '/admin' => 'welcome#admin', as: 'admin'
+  delete '/users.:id' => 'users#destroy', as: 'delete_user'
+
 end
