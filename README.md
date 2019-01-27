@@ -15,9 +15,11 @@ A0188295L
 3. User can view both undone and completed tasks.
 4. Tasks show countdowns to the due dates.
 5. Admin is able to view and delete users.
+To explore these features, you may sign up a new account or log in using this dummy account: `me@gmail.com` password: `me`.
+Please refer to [screenshots](https://github.com/LiuZechu/Riding-on-Rails/tree/master/Planit_screenshots) for more details.
 
 ## Getting Started Locally
-1. Install Ruby on Rails.
+1. Install Ruby on Rails. Ruby version: 2.4.5
 2. Clone this repository to a local folder.
 3. Navigate to the folder  `todo_manager` and run  `$ bin/rails server` in the terminal/command prompt.
 4. Access the application on a browser at `http://localhost:3000/`.
