@@ -6,6 +6,9 @@ Liu Zechu
 ## Matriculation Number
 A0188295L
 
+## Deployment
+*Planit* has been deployed on the Internet via [Heroku](https://www.heroku.com/). Try it out by clicking [here](https://planit2019.herokuapp.com/) or go to the link `https://planit2019.herokuapp.com/`.
+
 ## Features
 1. Multiple users can use the application by signing up and signing in.
 2. User can create, tag, view, update, mark-as-complete, delete to-do tasks.
@@ -13,7 +16,7 @@ A0188295L
 4. Tasks show countdowns to the due dates.
 5. Admin is able to view and delete users.
 
-## Getting started locally
+## Getting Started Locally
 1. Install Ruby on Rails.
 2. Clone this repository to a local folder.
 3. Navigate to the folder  `todo_manager` and run  `$ bin/rails server` in the terminal/command prompt.
@@ -26,4 +29,4 @@ A0188295L
 
 ## Author
 **Liu Zechu** - *CS undergraduate at National University of Singapore (NUS)*. 
-GitHub - [LiuZechu] (https://github.com/LiuZechu). Email - `liuzechu2013@gmail.com`.
+GitHub - [LiuZechu](https://github.com/LiuZechu). Email - `liuzechu2013@gmail.com`.

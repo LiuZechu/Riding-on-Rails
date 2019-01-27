@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2019_01_07_030738) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "tasks", force: :cascade do |t|
     t.string "content"
     t.date "due_date"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "tag"
     t.string "priority_level"
     t.datetime "created_at", null: false
@@ -35,4 +38,5 @@ ActiveRecord::Schema.define(version: 2019_01_07_030738) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "tasks", "users"
 end

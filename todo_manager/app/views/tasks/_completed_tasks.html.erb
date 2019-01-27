@@ -7,7 +7,7 @@
     <th colspan="2"></th>
   </tr>
 
-  <% @user.tasks.where(is_completed: true).each do |task| %>
+  <% @user.tasks.order("due_date ASC").where(is_completed: true).each do |task| %>
     <tr>
       <td><%= task.content %></td>
       <td><%= task.due_date %></td>
